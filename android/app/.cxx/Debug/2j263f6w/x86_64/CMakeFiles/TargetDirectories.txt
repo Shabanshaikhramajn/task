@@ -1,0 +1,2 @@
+E:/calyx/task-main/android/app/.cxx/Debug/2j263f6w/x86_64/CMakeFiles/edit_cache.dir
+E:/calyx/task-main/android/app/.cxx/Debug/2j263f6w/x86_64/CMakeFiles/rebuild_cache.dir

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:task/controller/login_controller/login_controller.dart';
 import 'package:task/pages/bottom_nav_bar/bottom_nav_bar_screen.dart';
+import 'package:task/pages/check_rates_screen/check_rates_screen.dart';
 import 'package:task/res/routes/getx_route_names.dart';
 import 'package:task/utils/App_assets.dart';
 import 'package:task/utils/app_colors.dart';
@@ -154,8 +155,8 @@ class LoginScreen extends StatelessWidget {
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 // Get.toNamed(RoutesName.bottomNavBarScreen);
-                                Get.to(BottomNavBarScreen());
                               }
+                                Get.to(BottomNavBarScreen());
                             },
                           ),
                           Spacer(),
@@ -163,13 +164,14 @@ class LoginScreen extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  Get.toNamed(RoutesName.checkRatesScreen);
+                                  // Get.toNamed(RoutesName.checkRatesScreen);
+                                  Get.to(CheckRatesScreen());
                                 },
                                 child: Text('Check Rates',
-                                    style: GoogleFonts.manrope(
-                                      fontWeight: FontWeight.w800,
+                                    style:  TextStyle(
+                                         fontWeight: FontWeight.w800,
                                       fontSize: 16,
-                                    )),
+                                    )      ),
                               ),
                               verticalSpace(15),
                               Text(

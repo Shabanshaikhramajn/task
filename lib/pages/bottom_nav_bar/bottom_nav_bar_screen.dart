@@ -56,6 +56,7 @@ class BottomNavBarScreen extends StatelessWidget {
             ),
             backgroundColor: AppColors.primaryColor,
             shape: CircleBorder(),
+            
             onPressed: () {
               Get.toNamed(RoutesName.sendMoneyScreen);
             },
@@ -65,48 +66,53 @@ class BottomNavBarScreen extends StatelessWidget {
         bottomNavigationBar: Obx(
           () => BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
-            selectedItemColor: AppColors.lightDarkColor,
+            selectedItemColor: AppColors.primaryColor,
+            unselectedItemColor: AppColors.greyColor,
             showUnselectedLabels: true,
             showSelectedLabels: true,
-            unselectedItemColor: AppColors.greyColor,
             currentIndex: bottomNavBarController.selectedPage.value,
             unselectedFontSize: 10,
-            selectedFontSize: 10,
-            selectedLabelStyle: TextStyle(fontSize: 12),
+            selectedFontSize: 12,
+
+            selectedLabelStyle: TextStyle(fontSize: 14, color: AppColors.primaryColor),
             unselectedLabelStyle: TextStyle(fontSize: 12),
             items: [
                BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.only(bottom: 6.0,),
-                    child: SvgPicture.asset(AppAssets.dashboardIcon, height: 25, width: 25, semanticsLabel: 'Acme Logo'),
+                    child: SvgPicture.asset(AppAssets.dashboardIcon, height: 25, width: 25, semanticsLabel: 'Acme Logo', ),
                   ),
                   label: "Dashboard"),
                   BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.only(bottom: 6.0,),
-                    child: SvgPicture.asset(AppAssets.profileIcon, height: 25, width: 25, semanticsLabel: 'Acme Logo'),
+                    child: SvgPicture.asset(AppAssets.profileIcon, height: 25, width: 25, semanticsLabel: 'Acme Logo', ),
                   ),
                   label: "Recepient"),
                   BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.only(bottom: 6.0,),
-                    child: SvgPicture.asset(  AppAssets.sendMoneyIcon    , height: 25, width: 25, semanticsLabel: 'Acme Logo'),
+                    child: SvgPicture.asset(  AppAssets.sendMoneyIcon    , height: 25, width: 25, semanticsLabel: 'Acme Logo', ),
                   ),
                   label: "Send Money"),
                   BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.only(bottom: 6.0,),
-                    child: SvgPicture.asset(AppAssets.historyIcon, height: 25, width: 25, semanticsLabel: 'Acme Logo'),
+                    child: SvgPicture.asset(AppAssets.historyIcon, height: 25, width: 25, semanticsLabel: 'Acme Logo', ),
                   ),
                   label: "History"),
                   BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.only(bottom: 6.0,),
-                    child: SvgPicture.asset(AppAssets.profileIcon2 , height: 25, width: 25, semanticsLabel: 'Acme Logo'),
+                    child: SvgPicture.asset(AppAssets.profileIcon2 , height: 25, width: 25, semanticsLabel: 'Acme Logo', ),
                   ),
                   label: "Profile"),
              
             ],
+            onTap: (index){
+              bottomNavBarController.selectedPage.value = index;
+
+            },
           ),
         )); 
   }
