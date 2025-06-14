@@ -10,4 +10,6 @@ class LoginController extends GetxController {
     passwordVisible.value =
         !passwordVisible.value; 
   }
+
+  
 }

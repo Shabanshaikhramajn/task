@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 class AppTextStyles {
   static const TextStyle headline1 = TextStyle(
     fontSize: 23,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w700,
+
     color: Colors.black,
   );
 
   static const TextStyle headline2 = TextStyle(
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: FontWeight.w600,
     color: Colors.black87,
   );

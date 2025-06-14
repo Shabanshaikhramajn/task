@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:task/pages/bottom_nav_bar/bottom_nav_bar_screen.dart';
+import 'package:task/pages/forgot_password_screen/forgot_password.dart';
 import 'package:task/pages/login_screen/login_screen.dart';
 
 class AppRoutes {
@@ -11,7 +12,7 @@ class AppRoutes {
       ),
        GetPage(
         name: 'forgot_password',
-        page: () => LoginScreen(),
+        page: () => ForgotPasswordScreen(),
       ),
        GetPage(
         name: 'bottom_nav_bar',
