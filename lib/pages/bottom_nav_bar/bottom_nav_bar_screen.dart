@@ -78,63 +78,116 @@ class BottomNavBarScreen extends StatelessWidget {
               BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.only(bottom: 6.0,),
-                    child: SvgPicture.asset("assets/icon/navigation-icons/home-selective.svg", height: 25, width: 25, semanticsLabel: 'Acme Logo'),
+                    child: Image.asset(
+      'assets/images/logo.png',
+      width: 150,
+      height: 150,
+      fit: BoxFit.cover,
+    ),
+                    
+              
                   ),
                   label: "Dashboard")
             else
               BottomNavigationBarItem(
-                  icon: Padding(padding: const EdgeInsets.only(bottom: 6.0), child: SvgPicture.asset("assets/icon/navigation-icons/home-icon.svg", height: 25, width: 25, semanticsLabel: 'Acme Logo')),
+                  icon: Padding(padding: const EdgeInsets.only(bottom: 6.0),
+                   child: Image.asset(
+      'assets/images/logo.png',
+      width: 150,
+      height: 150,
+      fit: BoxFit.cover,
+    ),
+                 
+                   ),
                   label: "Dashboard"),
             if (bottomNavBarController.selectedPage.value == 1)
               BottomNavigationBarItem(
                   icon: Padding(
                       padding: const EdgeInsets.only(bottom: 6.0),
-                      child: SvgPicture.asset("assets/icon/navigation-icons/ic_recipient_dashboard_selective.svg", height: 25, width: 25, semanticsLabel: 'Acme Logo')),
+                      child:Image.asset(
+      'assets/images/logo.png',
+      width: 150,
+      height: 150,
+      fit: BoxFit.cover,
+    ),),
                   label: "Recipient")
             else
               BottomNavigationBarItem(
                   icon: Padding(
                       padding: const EdgeInsets.only(bottom: 6.0),
-                      child: SvgPicture.asset("assets/icon/navigation-icons/ic_recipient_dashboard.svg", height: 25, width: 25, semanticsLabel: 'Acme Logo')),
+                      child: Image.asset(
+      'assets/images/logo.png',
+      width: 150,
+      height: 150,
+      fit: BoxFit.cover,
+    ),),
                   label: "Recipient"),
          
             BottomNavigationBarItem(
               
-                icon: SvgPicture.asset("assets/icon/ic_user_icon.svg", color: Colors.transparent, height: 32, width: 32, semanticsLabel: 'Acme Logo'),
+                icon: Image.asset(
+      'assets/images/logo.png',
+      width: 150,
+      height: 150,
+      fit: BoxFit.cover,
+    ),
                 label: "Send Money"),
             if (bottomNavBarController.selectedPage.value == 3)
               BottomNavigationBarItem(
                   icon: Padding(
-                      padding: const EdgeInsets.only(bottom: 6.0), child: SvgPicture.asset("assets/icon/navigation-icons/history-selective.svg", height: 25, width: 25, semanticsLabel: 'History')),
+                      padding: const EdgeInsets.only(bottom: 6.0), 
+                      child:Image.asset(
+      'assets/images/logo.png',
+      width: 150,
+      height: 150,
+      fit: BoxFit.cover,
+    ),),
                   label: "History")
             else
               BottomNavigationBarItem(
-                  icon: Padding(padding: const EdgeInsets.only(bottom: 6.0), child: SvgPicture.asset("assets/icon/navigation-icons/history.svg", height: 25, width: 25, semanticsLabel: 'History')),
+                  icon: Padding(padding: const EdgeInsets.only(bottom: 6.0),
+                   child: Image.asset(
+      'assets/images/logo.png',
+      width: 150,
+      height: 150,
+      fit: BoxFit.cover,
+    ),),
                   label: "History"),
            
             if (bottomNavBarController.selectedPage.value == 4)
               BottomNavigationBarItem(
                   icon: Padding(
-                      padding: const EdgeInsets.only(bottom: 6.0), child: SvgPicture.asset("assets/icon/navigation-icons/profile-icon-selective.svg", height: 25, width: 25, semanticsLabel: 'Setting')),
+                      padding: const EdgeInsets.only(bottom: 6.0),
+                       child: Image.asset(
+      'assets/images/logo.png',
+      width: 150,
+      height: 150,
+      fit: BoxFit.cover,
+    ),),
                   label: "Profile")
             else
               BottomNavigationBarItem(
                   icon:
-                  Padding(padding: const EdgeInsets.only(bottom: 6.0), child: SvgPicture.asset("assets/icon/navigation-icons/Profile icon.svg", height: 25, width: 25, semanticsLabel: 'Setting')),
+                  Padding(padding: const EdgeInsets.only(bottom: 6.0), 
+                  child:Image.asset(
+      'assets/images/logo.png',
+      width: 150,
+      height: 150,
+      fit: BoxFit.cover,
+    ),),
                   label: "Profile"),
 
           ],
-          onTap: (onTap) {
-            if (onTap != 2) {
-              bottomNavBarController.selectedPage.value = onTap;
-            } else if (onTap == 1) {
-              CircularLoader.show();
-            } else if (onTap == 3) {
-              _transferHistoryDetailsController.isCalled = false;
-            }
-          },
+          // onTap: (onTap) {
+          //   if (onTap != 2) {
+          //     bottomNavBarController.selectedPage.value = onTap;
+          //   } else if (onTap == 1) {
+          //     CircularLoader.show();
+          //   } else if (onTap == 3) {
+          //   }
+          // },
         ),
 
-    );
+      )  );
   }
 }
