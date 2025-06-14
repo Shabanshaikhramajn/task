@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:task/pages/bottom_nav_bar/bottom_nav_bar_screen.dart';
 import 'package:task/pages/forgot_password_screen/forgot_password.dart';
 import 'package:task/pages/login_screen/login_screen.dart';
+import 'package:task/pages/send_money_screen/send_money_screen.dart';
 
 class AppRoutes {
   static List<GetPage> appRoutes() {
@@ -22,6 +23,14 @@ class AppRoutes {
         name: 'send_money_screen',
         page: () => BottomNavBarScreen(),
       ),
+        GetPage(
+        name: 'check_rates_screen',
+        page: () => CheckRatesScreen(),
+      ),
+
+
+
+      
     ];
   }
 }

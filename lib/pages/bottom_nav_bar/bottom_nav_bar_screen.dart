@@ -6,8 +6,10 @@ import 'package:task/pages/history_screen/history_screen.dart';
 import 'package:task/pages/profile_screen/profile_screen.dart';
 import 'package:task/pages/recipient_screen/recipient_screen.dart';
 import 'package:task/res/routes/getx_route_names.dart';
+import 'package:task/utils/App_assets.dart';
 import 'package:task/utils/app_colors.dart';
-import 'package:task/utils/circular_loader.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 
 class BottomNavBarScreen extends StatelessWidget {
   BottomNavBarScreen({super.key});
@@ -38,156 +40,74 @@ class BottomNavBarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
-        height: 73,
-        width: 73,
-        padding: EdgeInsets.all(5),
-        decoration: BoxDecoration(
-            shape: BoxShape.circle, color: AppColors.primaryColor),
-        child: FloatingActionButton.large(
-          child: Image(
-            image: AssetImage('assets/icons/send_money'),
-            height: 32,
-            width: 32,
+        resizeToAvoidBottomInset: false,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Container(
+          height: 73,
+          width: 73,
+          padding: EdgeInsets.all(5),
+          decoration: BoxDecoration(
+              shape: BoxShape.circle, color: AppColors.primaryColor),
+          child: FloatingActionButton.large(
+            child: Image(
+              image: AssetImage(AppAssets.sendMoneyIcon),
+              height: 32,
+              width: 32,
+            ),
+            backgroundColor: AppColors.primaryColor,
+            shape: CircleBorder(),
+            onPressed: () {
+              Get.toNamed(RoutesName.sendMoneyScreen);
+            },
           ),
-          backgroundColor: AppColors.primaryColor,
-          shape: CircleBorder(),
-          onPressed: () {
-            Get.toNamed(RoutesName.sendMoneyScreen);
-          },
         ),
-      ),
-      body: Obx(() => screenWidget()),
-        
-         bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: AppColors.lightDarkColor ,
-          showUnselectedLabels: true,
-          showSelectedLabels: true,
-          unselectedItemColor: AppColors.greyColor,
-          currentIndex: bottomNavBarController.selectedPage.value,
-          unselectedFontSize: 10,
-          selectedFontSize: 10,
-          selectedLabelStyle: TextStyle(fontSize: 12), 
-          unselectedLabelStyle: TextStyle(fontSize: 12), 
-          items: [
-            if (bottomNavBarController.selectedPage.value == 0)
-              BottomNavigationBarItem(
+        body: Obx(() => screenWidget()),
+        bottomNavigationBar: Obx(
+          () => BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: AppColors.lightDarkColor,
+            showUnselectedLabels: true,
+            showSelectedLabels: true,
+            unselectedItemColor: AppColors.greyColor,
+            currentIndex: bottomNavBarController.selectedPage.value,
+            unselectedFontSize: 10,
+            selectedFontSize: 10,
+            selectedLabelStyle: TextStyle(fontSize: 12),
+            unselectedLabelStyle: TextStyle(fontSize: 12),
+            items: [
+               BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.only(bottom: 6.0,),
-                    child: Image.asset(
-      'assets/images/logo.png',
-      width: 150,
-      height: 150,
-      fit: BoxFit.cover,
-    ),
-                    
-              
+                    child: SvgPicture.asset(AppAssets.dashboardIcon, height: 25, width: 25, semanticsLabel: 'Acme Logo'),
                   ),
-                  label: "Dashboard")
-            else
-              BottomNavigationBarItem(
-                  icon: Padding(padding: const EdgeInsets.only(bottom: 6.0),
-                   child: Image.asset(
-      'assets/images/logo.png',
-      width: 150,
-      height: 150,
-      fit: BoxFit.cover,
-    ),
-                 
-                   ),
                   label: "Dashboard"),
-            if (bottomNavBarController.selectedPage.value == 1)
-              BottomNavigationBarItem(
+                  BottomNavigationBarItem(
                   icon: Padding(
-                      padding: const EdgeInsets.only(bottom: 6.0),
-                      child:Image.asset(
-      'assets/images/logo.png',
-      width: 150,
-      height: 150,
-      fit: BoxFit.cover,
-    ),),
-                  label: "Recipient")
-            else
-              BottomNavigationBarItem(
+                    padding: const EdgeInsets.only(bottom: 6.0,),
+                    child: SvgPicture.asset(AppAssets.profileIcon, height: 25, width: 25, semanticsLabel: 'Acme Logo'),
+                  ),
+                  label: "Recepient"),
+                  BottomNavigationBarItem(
                   icon: Padding(
-                      padding: const EdgeInsets.only(bottom: 6.0),
-                      child: Image.asset(
-      'assets/images/logo.png',
-      width: 150,
-      height: 150,
-      fit: BoxFit.cover,
-    ),),
-                  label: "Recipient"),
-         
-            BottomNavigationBarItem(
-              
-                icon: Image.asset(
-      'assets/images/logo.png',
-      width: 150,
-      height: 150,
-      fit: BoxFit.cover,
-    ),
-                label: "Send Money"),
-            if (bottomNavBarController.selectedPage.value == 3)
-              BottomNavigationBarItem(
+                    padding: const EdgeInsets.only(bottom: 6.0,),
+                    child: SvgPicture.asset(  AppAssets.sendMoneyIcon    , height: 25, width: 25, semanticsLabel: 'Acme Logo'),
+                  ),
+                  label: "Send Money"),
+                  BottomNavigationBarItem(
                   icon: Padding(
-                      padding: const EdgeInsets.only(bottom: 6.0), 
-                      child:Image.asset(
-      'assets/images/logo.png',
-      width: 150,
-      height: 150,
-      fit: BoxFit.cover,
-    ),),
-                  label: "History")
-            else
-              BottomNavigationBarItem(
-                  icon: Padding(padding: const EdgeInsets.only(bottom: 6.0),
-                   child: Image.asset(
-      'assets/images/logo.png',
-      width: 150,
-      height: 150,
-      fit: BoxFit.cover,
-    ),),
+                    padding: const EdgeInsets.only(bottom: 6.0,),
+                    child: SvgPicture.asset(AppAssets.historyIcon, height: 25, width: 25, semanticsLabel: 'Acme Logo'),
+                  ),
                   label: "History"),
-           
-            if (bottomNavBarController.selectedPage.value == 4)
-              BottomNavigationBarItem(
+                  BottomNavigationBarItem(
                   icon: Padding(
-                      padding: const EdgeInsets.only(bottom: 6.0),
-                       child: Image.asset(
-      'assets/images/logo.png',
-      width: 150,
-      height: 150,
-      fit: BoxFit.cover,
-    ),),
-                  label: "Profile")
-            else
-              BottomNavigationBarItem(
-                  icon:
-                  Padding(padding: const EdgeInsets.only(bottom: 6.0), 
-                  child:Image.asset(
-      'assets/images/logo.png',
-      width: 150,
-      height: 150,
-      fit: BoxFit.cover,
-    ),),
+                    padding: const EdgeInsets.only(bottom: 6.0,),
+                    child: SvgPicture.asset(AppAssets.profileIcon2 , height: 25, width: 25, semanticsLabel: 'Acme Logo'),
+                  ),
                   label: "Profile"),
-
-          ],
-          // onTap: (onTap) {
-          //   if (onTap != 2) {
-          //     bottomNavBarController.selectedPage.value = onTap;
-          //   } else if (onTap == 1) {
-          //     CircularLoader.show();
-          //   } else if (onTap == 3) {
-          //   }
-          // },
-        ),
-
-      )  );
+             
+            ],
+          ),
+        )); 
   }
 }

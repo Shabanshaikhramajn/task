@@ -80,7 +80,7 @@ class ContainerButtonModel extends StatelessWidget {
                             color: textColor ?? Colors.white,
                             fontWeight: fontweight ?? FontWeight.w700,
                             fontSize: textSize ?? 22,
-                            fontFamily: 'Sen'),
+                          ),
                       ),
               ),
             ],

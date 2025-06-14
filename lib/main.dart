@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:task/pages/bottom_nav_bar/bottom_nav_bar_screen.dart';
 import 'package:task/pages/login_screen/login_screen.dart';
 import 'package:device_preview/device_preview.dart';
 
@@ -26,6 +27,6 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
          
         ),
-        home: LoginScreen());
+        home: BottomNavBarScreen());
   }
 }

@@ -6,8 +6,8 @@ import 'package:task/utils/text_style.dart';
 import 'package:task/utils/widgets.dart';
 import 'package:flutter/cupertino.dart';
 
-class SendMoneyScreen extends StatelessWidget {
-  SendMoneyScreen({super.key});
+class CheckRatesScreen extends StatelessWidget {
+  CheckRatesScreen({super.key});
   CheckRatesController checkRatesController = Get.put(CheckRatesController());
 
   @override
