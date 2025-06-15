@@ -123,27 +123,69 @@ class DashboardScreen extends StatelessWidget {
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
               ),
-              // Container(
-              //   margin: EdgeInsets.symmetric(horizontal: 16),
-              //   padding: EdgeInsets.all(12),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  children: [
+                    ClipOval(
+                      child: Image.network(
+                        "https://flagcdn.com/w40/gb.png",
+                        width: 40,
+                        height: 40,
+                        fit: BoxFit.fill,
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Icon(Icons.flag),
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                    Text("1.00 GBP"),
+                    Spacer(),
+                    Icon(Icons.compare_arrows),
+                    Spacer(),
+                    Text("100.00 INR"),
+                    SizedBox(width: 8),
+                    Image.asset("assets/flags/in.png", height: 24),
+                  ],
+                ),
+              ),
+
+              //           Container(
+              //   margin: const EdgeInsets.only(top: 10),
+              //   padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
               //   decoration: BoxDecoration(
-              //     color: Colors.white,
-              //     borderRadius: BorderRadius.circular(12),
-              //   ),
+              //       color: Colors.white, borderRadius: BorderRadius.circular(12)),
               //   child: Row(
               //     children: [
-              //       Image.asset("assets/flags/uk.png", height: 24),
-              //       SizedBox(width: 8),
-              //       Text("1.00 GBP"),
+              //       Expanded(
+              //         child: Text(
+              //           title,
+              //           style:
+              //               GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.bold),
+              //         ),
+              //       ),
               //       Spacer(),
-              //       Icon(Icons.compare_arrows),
-              //       Spacer(),
-              //       Text("100.00 INR"),
-              //       SizedBox(width: 8),
-              //       Image.asset("assets/flags/in.png", height: 24),
+              //       Text("", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              //       SizedBox(width: 15),
+              //       ClipOval(
+              //         child: Image.network(
+              //           flagUrl,
+              //           width: 40,
+              //           height: 40,
+              //           fit: BoxFit.fill,
+              //           errorBuilder: (context, error, stackTrace) =>
+              //               const Icon(Icons.flag),
+              //         ),
+              //       ),
+              //       const SizedBox(width: 5),
+              //       if (trailing != null) trailing,
               //     ],
               //   ),
-              // ),
+              // );
             ],
           ),
         ),

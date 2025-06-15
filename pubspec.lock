@@ -50,7 +50,7 @@ packages:
     source: hosted
     version: "1.19.1"
   connectivity_plus:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: connectivity_plus
       sha256: "051849e2bd7c7b3bc5844ea0d096609ddc3a859890ec3a9ac4a65a2620cc1f99"
@@ -119,7 +119,7 @@ packages:
     source: hosted
     version: "5.0.0"
   flutter_svg:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: flutter_svg
       sha256: d44bf546b13025ec7353091516f6881f1d4c633993cb109c3916c3a0159dadf1
@@ -169,7 +169,7 @@ packages:
     source: hosted
     version: "4.1.2"
   intl:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: intl
       sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf

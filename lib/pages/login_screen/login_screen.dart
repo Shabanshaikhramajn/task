@@ -33,7 +33,7 @@ class LoginScreen extends StatelessWidget {
                     key: _formKey,
                     child: Padding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: Get.width * 0.03),
+                          EdgeInsets.symmetric(horizontal: Get.width * 0.05),
                       child: Column(
                         children: [
                           verticalSpace(Get.height * 0.08),
@@ -153,10 +153,9 @@ class LoginScreen extends StatelessWidget {
                             textSize: 17,
                             containerHieght: 48,
                             onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                // Get.toNamed(RoutesName.bottomNavBarScreen);
-                              }
-                                Get.to(BottomNavBarScreen());
+                              // if (_formKey.currentState!.validate()) {
+                              // }
+                              Get.to(BottomNavBarScreen());
                             },
                           ),
                           Spacer(),
@@ -168,10 +167,10 @@ class LoginScreen extends StatelessWidget {
                                   Get.to(CheckRatesScreen());
                                 },
                                 child: Text('Check Rates',
-                                    style:  TextStyle(
-                                         fontWeight: FontWeight.w800,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w800,
                                       fontSize: 16,
-                                    )      ),
+                                    )),
                               ),
                               verticalSpace(15),
                               Text(

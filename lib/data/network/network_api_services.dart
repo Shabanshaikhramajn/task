@@ -38,7 +38,7 @@ class NetworkApiService {
    print("res is ${response.body}");
    print("url is  ${response.body}");
       return response;
-    } on TimeoutException catch (e) {
+    } on TimeoutException catch (e) { 
        CommonSnackbar.showSnackbar(
   message:  "Request timed out"
        );

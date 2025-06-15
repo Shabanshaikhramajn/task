@@ -1,43 +1,34 @@
 import 'dart:convert';
 
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:task/models/country_data_model.dart';
 import 'package:task/res/routes/repository/currency_data_repo/currency_data_repo.dart';
 import 'package:task/utils/circular_loader.dart';
 import 'package:task/utils/common_snackbar.dart';
 import 'package:task/utils/connection_check.dart';
 
-class CheckRatesController extends GetxController {
+class CheckRatesController extends GetxController
+    with StateMixin<List<CountryDataModel>> {
   final _apiServices = CurrencyDataRepo();
 
-  void getCurrencyRates() async {
-    // bool internetCheck = await ConnectionService.getConnectionStatus();
+  var currencyRates = <CountryDataModel>[].obs;
+  RxString selectedCountryCode = "NGN".obs;
+  RxString selectedCountryFlagUrl = "https://flagcdn.com/w40/ng.png".obs;
+  final TextEditingController gbpController = TextEditingController(text: "1.0"); 
+  RxString selectedCountryName  = "Nigeria".obs;
+ Future<void> getCurrencyRates() async {
+    bool internetCheck = await ConnectionService.getConnectionStatus();
 
-    // if (internetCheck) {
-    //   CommonSnackbar.showSnackbar(message: "No internet connection");
-    //   return;
-    // }
-    print("ptirnt");
+    if (internetCheck) {
+      CommonSnackbar.showSnackbar(message: "No internet connection");
+      change(null, status: RxStatus.error("No internet connection"));
+      return;
+    }
+
+    change(null, status: RxStatus.loading());
     // CircularLoader.show();
-
-    
-
-//   Map data =  {
-//  "userName" : "parth.calyx@gmail.com",
-//  "password" : "Calyx@1236",
-//  "credentialFlag": "",
-//  "clientID" : "1",
-//  "branchID" : "2",
-//  "otp":"",
-//  "resendotp":"", 
-//  "captcha":"", 
-//  "latitude": "19.995233321819526",
-//  "longitude": "73.74394510479006", 
-//  "deviceId": "73C03944-F185-4F31-80BE-61D2FB8BD362", 
-//  "ipAddress": "192.168.1.55",
-//  "flutterval" : "",
-//  "registrationval": ""
-// } ;
 
     final data = {
       "clientID": "1",
@@ -46,30 +37,44 @@ class CheckRatesController extends GetxController {
       "paymentDepositTypeID": "1",
       "deliveryTypeID": "1",
       "transferAmount": "10",
-      "currencyCode": "NGN",
+      "currencyCode":  selectedCountryCode.value,
       "branchID": "2",
-      "BaseCurrencyID": ""
+      "BaseCurrencyID": "22"
     };
+    try {
+      final response = await _apiServices.getCurrencyDataRepo(data);
 
-    _apiServices.getCurrencyDataRepo(data).then((http.Response value) async {
-      if (value.statusCode == 200) {
-        Map<String, dynamic> responseBody = jsonDecode(value.body);
+      if (response.statusCode == 200) {
+        final json = jsonDecode(response.body);
 
-        if (true) {
-        // CircularLoader.hide();
+        if (json['response'] == true && json['responseCode'] == "00") {
+          List<dynamic> dataList = json['data'];
+          List<CountryDataModel> rates =
+              dataList.map((item) => CountryDataModel.fromJson(item)).toList();
 
-          // authenticationModel = AuthenticationModel.fromJson(responseBody);
-          // getApiController.saveAccessToken(authenticationModel);
+  currencyRates.value =
+              dataList.map((item) => CountryDataModel.fromJson(item)).toList();
+
+
+          change(rates, status: RxStatus.success());
+        } else {
+          CommonSnackbar.showSnackbar(
+              message: "API Error: ${json['responseCode']}");
+          change(null,
+              status: RxStatus.error("API Error: ${json['responseCode']}"));
         }
       } else {
-        // CircularLoader.hide();
-        CommonSnackbar.showSnackbar(message: "Something went wrong");
+        CommonSnackbar.showSnackbar(
+            message: "HTTP Error: ${response.statusCode}");
+        change(null,
+            status: RxStatus.error("HTTP Error: ${response.statusCode}"));
       }
-    }).catchError((error, stackTrace) {
+    } catch (e) {
       CommonSnackbar.showSnackbar(message: "Something went wrong");
-          print('error is $error');
-          print('stack is $stackTrace');
+      change(null, status: RxStatus.error("Something went wrong"));
+      print('error is $e');
+    } finally {
       // CircularLoader.hide();
-    });
+    }
   }
 }
