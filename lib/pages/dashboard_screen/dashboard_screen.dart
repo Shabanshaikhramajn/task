@@ -1,11 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/get_core.dart';
 import 'package:intl/intl.dart';
+import 'package:task/controller/check_rates_controller/check_rates_controller.dart';
 import 'package:task/pages/country_picker_screen/country_picker_screen.dart';
 import 'package:task/utils/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({super.key});
+class DashboardScreen extends StatefulWidget {
+  DashboardScreen({super.key});
+
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  CheckRatesController checkRatesController = Get.put(CheckRatesController());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    checkRatesController.getCurrencyRates();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +207,10 @@ class DashboardScreen extends StatelessWidget {
                     Spacer(),
                     Icon(Icons.compare_arrows, size: 35),
                     Spacer(),
-                    Text("100.00 INR"),
+                    Obx(
+                      () => Text(
+                          "${checkRatesController.recepientGetsRate.value} NGN"),
+                    ),
                     SizedBox(width: 12),
                     ClipOval(
                       child: Image.network(
@@ -206,7 +226,7 @@ class DashboardScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 15,
+                height: 20,
               ),
               Container(
                 width: double.infinity,
@@ -222,8 +242,8 @@ class DashboardScreen extends StatelessWidget {
                     Text(
                       "Refer a Friend",
                       style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.white,
+                        fontSize: 20,
+                        color: Colors.white,
                       ),
                     ),
                     const SizedBox(height: 2),
@@ -236,7 +256,7 @@ class DashboardScreen extends StatelessWidget {
                       "You Can Earn €10",
                       style: TextStyle(fontSize: 15, color: Colors.white),
                     ),
-                    const SizedBox(height: 5)
+                    const SizedBox(height: 20)
                   ],
                 ),
               )

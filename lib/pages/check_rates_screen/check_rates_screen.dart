@@ -45,8 +45,8 @@ class _CheckRatesScreenState extends State<CheckRatesScreen> {
           if (currencyRates == null || currencyRates.isEmpty) {
             return Center(child: Text("No currency data found"));
           }
-           final data = currencyRates[0];
-            return SafeArea(
+          final data = currencyRates[0];
+          return SafeArea(
             child: SingleChildScrollView(
               padding: EdgeInsets.zero,
               child: ConstrainedBox(
@@ -162,7 +162,8 @@ class _CheckRatesScreenState extends State<CheckRatesScreen> {
                               ),
                             )),
                             Spacer(),
-                            Text("${checkRatesController.selectedCountryName.value}",
+                            Text(
+                                "${checkRatesController.selectedCountryName.value}",
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold)),
                             SizedBox(width: 15),
@@ -183,7 +184,7 @@ class _CheckRatesScreenState extends State<CheckRatesScreen> {
                       ),
                       verticalSpace(Get.height * .03),
                       Container(
-                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        padding: const EdgeInsets.only(top: 16, bottom: 5),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(12),
@@ -374,8 +375,7 @@ class _CheckRatesScreenState extends State<CheckRatesScreen> {
             ),
           ),
           Spacer(),
-          SizedBox(width: 15),
-          const SizedBox(width: 5),
+          // SizedBox(width: 15),
           if (trailing != null) trailing,
         ],
       ),
