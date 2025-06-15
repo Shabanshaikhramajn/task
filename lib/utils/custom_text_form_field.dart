@@ -13,6 +13,7 @@ class CustomTextFormField extends StatelessWidget {
     this.borderColor,
     this.borderRadius,
     this.verticalPadding,
+    
     this.horizontalPadding,
       this.suffixIcon,
     this.obscureText = false, 
@@ -50,7 +51,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
          obscureText: obscureText,
-         
+          
         controller: controller,
         onChanged: onChanged,
         cursorColor: AppColors.primaryColor,
@@ -61,6 +62,7 @@ class CustomTextFormField extends StatelessWidget {
             ? [filteringTextInputFormatter!]
             : [],
         decoration: InputDecoration(
+          
          suffixIcon: suffixIcon,
           prefixIcon: prefixIcon,
           hintText: hint,
@@ -107,6 +109,8 @@ class CustomTextFormField extends StatelessWidget {
       
         style: TextStyle(
           fontSize: 18,
+            fontWeight: fontWeight ?? FontWeight.w200,
+
         ),
         validator: validator);
   }

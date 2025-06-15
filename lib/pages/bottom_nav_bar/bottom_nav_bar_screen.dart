@@ -125,7 +125,7 @@ class BottomNavBarScreen extends StatelessWidget {
                       semanticsLabel: 'Acme Logo',
                     ),
                   ),
-                  label: "Send Money"),
+                  label: "Send"),
               BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.only(

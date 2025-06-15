@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:task/controller/login_controller/login_controller.dart';
 import 'package:task/pages/bottom_nav_bar/bottom_nav_bar_screen.dart';
 import 'package:task/pages/check_rates_screen/check_rates_screen.dart';
+import 'package:task/pages/forgot_password_screen/forgot_password.dart';
 import 'package:task/res/routes/getx_route_names.dart';
 import 'package:task/utils/App_assets.dart';
 import 'package:task/utils/app_colors.dart';
@@ -135,8 +136,9 @@ class LoginScreen extends StatelessWidget {
                                 ),
                               ),
                               GestureDetector(
-                                onTap: () => Get.toNamed(
-                                    RoutesName.forgotPasswordScreen),
+                                onTap: () => Get.to(()=>ForgotPasswordScreen()),
+                                //  Get.toNamed(
+                                //     RoutesName.forgotPasswordScreen),
                                 child: Text(
                                   "Forgot Password?",
                                   style: TextStyle(

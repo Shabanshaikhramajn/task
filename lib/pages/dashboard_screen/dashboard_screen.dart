@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:task/pages/country_picker_screen/country_picker_screen.dart';
 import 'package:task/utils/app_colors.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -123,6 +125,47 @@ class DashboardScreen extends StatelessWidget {
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
               ),
+              SizedBox(height: 10),
+
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12)),
+                child: Row(
+                  children: [
+                    ClipOval(
+                      child: Image.network(
+                        "https://flagcdn.com/w40/ng.png",
+                        width: 40,
+                        height: 40,
+                        fit: BoxFit.fill,
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Icon(Icons.flag),
+                      ),
+                    ),
+                    const SizedBox(width: 25),
+                    Expanded(
+                      child: Text(
+                        "Nigeria",
+                        style: GoogleFonts.inter(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Spacer(),
+                    SizedBox(width: 15),
+                    IconButton(
+                      icon: Icon(Icons.search, size: 30),
+                      onPressed: () => showCountryPickerBottomSheet(context),
+                    ),
+                    const SizedBox(width: 5),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 16),
                 padding: EdgeInsets.all(12),
@@ -142,17 +185,61 @@ class DashboardScreen extends StatelessWidget {
                             const Icon(Icons.flag),
                       ),
                     ),
-                    SizedBox(width: 8),
+                    SizedBox(width: 12),
                     Text("1.00 GBP"),
                     Spacer(),
-                    Icon(Icons.compare_arrows),
+                    Icon(Icons.compare_arrows, size: 35),
                     Spacer(),
                     Text("100.00 INR"),
-                    SizedBox(width: 8),
-                    Image.asset("assets/flags/in.png", height: 24),
+                    SizedBox(width: 12),
+                    ClipOval(
+                      child: Image.network(
+                        "https://flagcdn.com/w40/ng.png",
+                        width: 40,
+                        height: 40,
+                        fit: BoxFit.fill,
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Icon(Icons.flag),
+                      ),
+                    ),
                   ],
                 ),
               ),
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 3),
+                    Text(
+                      "Refer a Friend",
+                      style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      "Refer & Earn",
+                      style: TextStyle(fontSize: 15, color: Colors.white),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      "You Can Earn €10",
+                      style: TextStyle(fontSize: 15, color: Colors.white),
+                    ),
+                    const SizedBox(height: 5)
+                  ],
+                ),
+              )
 
               //           Container(
               //   margin: const EdgeInsets.only(top: 10),
@@ -197,7 +284,7 @@ class DashboardScreen extends StatelessWidget {
       String gbp, String ngn) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      padding: EdgeInsets.all(12),
+      padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),

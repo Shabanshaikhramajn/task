@@ -1,13 +1,11 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:task/controller/check_rates_controller/check_rates_controller.dart';
 import 'package:task/pages/country_picker_screen/country_picker_screen.dart';
 import 'package:task/pages/login_screen/login_screen.dart';
-import 'package:task/res/routes/getx_route_names.dart';
 import 'package:task/utils/app_colors.dart';
 import 'package:task/utils/container_button_model.dart';
 import 'package:task/utils/custom_text_form_field.dart';
@@ -32,6 +30,13 @@ class _CheckRatesScreenState extends State<CheckRatesScreen> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    checkRatesController.disposeValues();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.secondaryColor,
@@ -40,10 +45,8 @@ class _CheckRatesScreenState extends State<CheckRatesScreen> {
           if (currencyRates == null || currencyRates.isEmpty) {
             return Center(child: Text("No currency data found"));
           }
-
-          final data = currencyRates[0];
-
-          return SafeArea(
+           final data = currencyRates[0];
+            return SafeArea(
             child: SingleChildScrollView(
               padding: EdgeInsets.zero,
               child: ConstrainedBox(
@@ -96,16 +99,23 @@ class _CheckRatesScreenState extends State<CheckRatesScreen> {
                         child: Row(
                           children: [
                             Expanded(
-                              child:  CustomTextFormField(controller: checkRatesController.gbpController ,
-                              colors: AppColors.transparentColor,
-                              borderColor: AppColors.transparentColor,
-                              keyboardType: TextInputType.number,
-                              hint: ""),
-                              // Text(
-                              //   "",
-                              //   style: GoogleFonts.inter(
-                              //       fontSize: 18, fontWeight: FontWeight.bold),
-                              // ),
+                              child: CustomTextFormField(
+                                  fontWeight: FontWeight.bold,
+                                  controller:
+                                      checkRatesController.gbpController.value,
+                                  colors: AppColors.transparentColor,
+                                  borderColor: AppColors.transparentColor,
+                                  onChanged: (value) {
+                                    checkRatesController
+                                        .updateConvertedAmount();
+                                  },
+                                  keyboardType: TextInputType.numberWithOptions(
+                                      decimal: true),
+                                  filteringTextInputFormatter:
+                                      FilteringTextInputFormatter.allow(
+                                    RegExp(r'^\d*\.?\d{0,3}$'),
+                                  ),
+                                  hint: ""),
                             ),
                             Spacer(),
                             Text("GBP",
@@ -127,16 +137,50 @@ class _CheckRatesScreenState extends State<CheckRatesScreen> {
                           ],
                         ),
                       ),
-                      // firstRowContainer(
-                      //   flagUrl: 'https://flagcdn.com/w40/gb.png',
-                      //   title: '1.0 GBP',
-                      // ),
                       verticalSpace(Get.height * .02),
                       _sectionTitle("Recipient Gets"),
-                      secondRowContainer(
-                          flagUrl: 'https://flagcdn.com/w40/ng.png',
-                          title: "${data.rate}",
-                          currencyType: "${data.currencyCode}"),
+                      // secondRowContainer(
+                      //     flagUrl: 'https://flagcdn.com/w40/ng.png',
+                      //     title:
+                      //         "${data.rate ?? 0 * double.parse(checkRatesController.gbpController.value.text)}",
+                      //     currencyType: "${data.currencyCode}"),
+                      Container(
+                        margin: const EdgeInsets.only(top: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 25, vertical: 16),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: Obx(
+                              () => Text(
+                                "${checkRatesController.recepientGetsRate.value}",
+                                style: GoogleFonts.inter(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                            )),
+                            Spacer(),
+                            Text("${checkRatesController.selectedCountryName.value}",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold)),
+                            SizedBox(width: 15),
+                            ClipOval(
+                              child: Image.network(
+                                "https://flagcdn.com/w40/ng.png",
+                                width: 40,
+                                height: 40,
+                                fit: BoxFit.fill,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    const Icon(Icons.flag),
+                              ),
+                            ),
+                            const SizedBox(width: 5),
+                            // if (trailing != null) trailing,
+                          ],
+                        ),
+                      ),
                       verticalSpace(Get.height * .03),
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 16),
@@ -146,8 +190,8 @@ class _CheckRatesScreenState extends State<CheckRatesScreen> {
                         ),
                         child: Column(
                           children: [
-                            infoRow(
-                                "Transfer Fees", "${data.transferFeesGBP} GBP"),
+                            infoRow("Transfer Fees",
+                                "${checkRatesController.transferFees.value} GBP"),
                             infoRow("Exchange Rate", "${data.rate} "),
                             verticalSpace(Get.height * .008),
                             Container(
@@ -160,7 +204,7 @@ class _CheckRatesScreenState extends State<CheckRatesScreen> {
                                 color: AppColors.secondaryColor,
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: const Row(
+                              child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
@@ -168,10 +212,13 @@ class _CheckRatesScreenState extends State<CheckRatesScreen> {
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 15)),
-                                  Text("3.00 GBP",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 15)),
+                                  Obx(
+                                    () => Text(
+                                        "${checkRatesController.totalAmountToPay.value} GBP",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 15)),
+                                  )
                                 ],
                               ),
                             ),
@@ -187,6 +234,7 @@ class _CheckRatesScreenState extends State<CheckRatesScreen> {
         },
         onLoading: const Center(
             child: CircularProgressIndicator(
+          strokeWidth: 5,
           color: AppColors.primaryColor,
         )),
         onError: (error) =>
@@ -196,13 +244,14 @@ class _CheckRatesScreenState extends State<CheckRatesScreen> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 35.0),
         child: ContainerButtonModel(
-          borderRadius: BorderRadius.circular(8),
-          itext: 'Continue to Login',
-          fontweight: FontWeight.w500,
-          textSize: 17,
-          containerHieght: 48,
-          onPressed: () => Get.to(() => LoginScreen()),
-        ),
+            borderRadius: BorderRadius.circular(8),
+            itext: 'Continue to Login',
+            fontweight: FontWeight.w500,
+            textSize: 17,
+            containerHieght: 48,
+            onPressed: () {
+              Get.back();
+            }),
       ),
     );
   }
@@ -231,12 +280,13 @@ class _CheckRatesScreenState extends State<CheckRatesScreen> {
       child: Row(
         children: [
           Expanded(
-            child: Text(
-              title,
+              child: Obx(
+            () => Text(
+              "${checkRatesController.recepientGetsRate.value}",
               style:
                   GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-          ),
+          )),
           Spacer(),
           Text("", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           SizedBox(width: 15),
